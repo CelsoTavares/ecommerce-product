@@ -1,13 +1,16 @@
-import "./App.css";
+import "./app.css";
 import Header from "./compoments/Header";
 import Main from "./compoments/Main";
+import UseProvider from "./contexts/UseProvider";
 
-function App() {
+const App = () => { 
   return (
-    <div className="container-app">
-      <Header />
-      <Main />
-    </div>
+    <UseProvider>
+      <div>
+        <Header />
+        <Main />
+      </div>
+    </UseProvider>
   );
 }
 

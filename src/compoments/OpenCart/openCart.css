@@ -8,6 +8,7 @@
   background: var(--white);
   box-shadow: 0 1px 15px var(--darkGrayishBlue);
   transition: all 0.3s;
+  z-index: 99;
 }
 .openCart span:first-child {
   color: var(--black);

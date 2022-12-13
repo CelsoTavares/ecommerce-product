@@ -1,11 +1,6 @@
 import "./main.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import { CgShoppingCart } from "react-icons/cg";
-import Modal from "react-modal";
-import photo1 from "../../assets/product-1.jpg";
-import photo2 from "../../assets/product-2.jpg";
-import photo3 from "../../assets/product-3.jpg";
-import photo4 from "../../assets/product-4.jpg";
 import min1 from "../../assets/min-1.jpg";
 import min2 from "../../assets/min-2.jpg";
 import min3 from "../../assets/min-3.jpg";
@@ -14,39 +9,28 @@ import addition from "../../assets/icon-plus.svg";
 import subtraction from "../../assets/icon-minus.svg";
 import next from "../../assets/icon-next.svg";
 import previous from "../../assets/icon-previous.svg";
-
-Modal.setAppElement("#root");
+import { Context } from "../../contexts/UseProvider";
+import ModalHere from "../ModalHere";
 
 const Main = () => {
-  const photos = [photo1, photo2, photo3, photo4];
-  const [photo, setPhoto] = useState(photos[0]);
-  const [count, setCount] = useState(0);
+  const {
+    count,
+    setCount,
+    addCart,
+    handleNext,
+    handlePrevious,
+    photo,
+    setPhoto,
+    photos,
+  } = useContext(Context);
 
-  function addCart() {
-    const itens = document.querySelector(".itens");
-    const result = document.querySelector(".result");
-    const cartResult = document.querySelector(".cartResult");
-    const empty = document.querySelector(".empty");
-    const sneakers = 125;
+  const [modalIsOpen, setIsOpen] = useState(false);
 
-    if (count == 0) {
-      itens.style.display = "none";
-      result.innerHTML = "";
-    } else if (count > 0) {
-      itens.style.display = "flex";
-      itens.innerHTML = count;
-      result.innerHTML = `$${sneakers}.00 x ${count} <strong>$${
-        sneakers * count
-      }.00</strong>`;
-      cartResult.style.display = "block";
-      empty.style.display = "none";
-    }
-  }
-
-    useEffect(() => {
+  useEffect(() => {
     const min = document.querySelectorAll(".min img");
+
     min.forEach((item) => (item.style.border = "none"));
- 
+
     if (photo == photos[0]) {
       min[0].style.border = "2px solid hsl(26, 100%, 55%)";
     } else if (photo == photos[1]) {
@@ -58,38 +42,9 @@ const Main = () => {
     }
   }, [photo]);
 
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  function openModal() {
+  const openModal = () => {
     setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function handleNext() {
-    if (photo == photos[0]) {
-      setPhoto(photos[1]);
-    } else if (photo == photos[1]) {
-      setPhoto(photos[2]);
-    } else if (photo == photos[2]) {
-      setPhoto(photos[3]);
-    } else if (photo == photos[3]) {
-      setPhoto(photos[0]);
-    }
-  }
-
-  function handlePrevious() {
-    if (photo == photos[0]) {
-      setPhoto(photos[3]);
-    } else if (photo == photos[1]) {
-      setPhoto(photos[0]);
-    } else if (photo == photos[2]) {
-      setPhoto(photos[1]);
-    } else if (photo == photos[3]) {
-      setPhoto(photos[2]);
-    }
-  }
+  };
   return (
     <main>
       <section>
@@ -171,47 +126,7 @@ const Main = () => {
               </span>
               Add to cart
             </button>
-            <Modal
-              className="modal"
-              isOpen={modalIsOpen}
-              onRequestClose={closeModal}
-              overlayClassName="Overlay"
-            >
-              <div className="productsModal">
-                <div onClick={closeModal} className="divClose">
-                  X
-                </div>
-                <div onClick={handleNext} className="nextModal">
-                  <img src={next} alt="next" />
-                </div>
-                <div onClick={handlePrevious} className="previousModal">
-                  <img src={previous} alt="previous" />
-                </div>
-                <img className="imageModal" src={photo} alt="product" />
-                <div className="minModal">
-                  <img
-                    onClick={() => setPhoto(photos[0])}
-                    src={min1}
-                    alt="first photo"
-                  />
-                  <img
-                    onClick={() => setPhoto(photos[1])}
-                    src={min2}
-                    alt="second photo"
-                  />
-                  <img
-                    onClick={() => setPhoto(photos[2])}
-                    src={min3}
-                    alt="third photo"
-                  />
-                  <img
-                    onClick={() => setPhoto(photos[3])}
-                    src={min4}
-                    alt="fourth photo"
-                  />
-                </div>
-              </div>
-            </Modal>
+            <ModalHere modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
           </div>
         </div>
       </section>

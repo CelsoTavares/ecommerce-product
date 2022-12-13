@@ -1,0 +1,90 @@
+.modal {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.Overlay {
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 130%;
+  border: none;
+  outline: none;
+  padding: 10%;
+}
+.productsModal {
+  position: relative;
+}
+.divClose {
+  position: absolute;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+  top: -30px;
+  right: 0;
+}
+.divClose:hover {
+  color: var(--orange);
+}
+.imageModal {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.minModal {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3%;
+}
+.minModal img {
+  width: 18%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.minModal img:hover {
+  opacity: 0.5;
+}
+.nextModal {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 220px;
+  right: -30px;
+  width: 50px;
+  height: 50px;
+  background: var(--white);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.previousModal {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 220px;
+  left: -30px;
+  width: 50px;
+  height: 50px;
+  background: var(--white);
+  border-radius: 50%;
+  cursor: pointer;
+}
+@media (max-width: 650px) {
+  .modal {
+    display: none;
+  }
+  .Overlay {
+    display: none;
+  }
+}
