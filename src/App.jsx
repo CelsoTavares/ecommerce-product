@@ -1,4 +1,3 @@
-import "./app.css";
 import Header from "./compoments/Header";
 import Main from "./compoments/Main";
 import UseProvider from "./contexts/UseProvider";
